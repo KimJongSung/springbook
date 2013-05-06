@@ -16,10 +16,9 @@ public class userDaoTest {
 		UserDao dao = new UserDao();
 		User user = new User();
 		
-		user.setId("whiteship");
+		user.setId("unifyCore");
 		user.setName("KimJongsung");
 		user.setPassword("Password");
-		
 		
 		dao.add(user);
 		

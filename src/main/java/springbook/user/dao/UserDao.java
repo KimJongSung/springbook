@@ -12,11 +12,11 @@ public class UserDao {
 
 	public void add(User user) throws ClassNotFoundException,SQLException{
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection c = DriverManager.getConnection("jdbc:mysql://localhost/springbook","spring","book");
-		PreparedStatement ps = c.prepareStatement("insert into test.users(id,name,password) values(?,?,?)");
+		Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1/springbook","spring","book");
+		PreparedStatement ps = c.prepareStatement("insert into users(id,name,password) values(?,?,?)");
 		ps.setString(1,user.getId());
 		ps.setString(2,user.getName());
-		ps.setString(1,user.getPassword());
+		ps.setString(3,user.getPassword());
 		
 		ps.executeUpdate();
 		
@@ -27,18 +27,20 @@ public class UserDao {
 	
 	public User get(String id) throws ClassNotFoundException,SQLException{
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection c = DriverManager.getConnection("jdbc:mysql://localhost/springbook","spring","book");
+		Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1/springbook","spring","book");
 		
-		PreparedStatement ps = c.prepareStatement("select * from test.users where id = ?");
+		PreparedStatement ps = c.prepareStatement("select * from users where id = ?");
 		
 		ps.setString(1,id);
 		
 		ResultSet rs = ps.executeQuery();
 		
 		User user = new User();
-		user.setId(rs.getString("id"));
-		user.setName(rs.getString("name"));
-		user.setPassword(rs.getString("password"));
+		if(rs.next()){
+			user.setId(rs.getString("id"));
+			user.setName(rs.getString("name"));
+			user.setPassword(rs.getString("password"));
+		}
 
 		rs.close();
 		ps.close();
