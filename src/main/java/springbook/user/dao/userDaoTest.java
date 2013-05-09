@@ -13,7 +13,7 @@ public class userDaoTest {
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		UserDao dao = new UserDao();
+		UserDao dao = new NUserDao();
 		User user = new User();
 		
 		user.setId("unifyCore");
